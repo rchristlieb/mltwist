@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id Int @id @default(autoincrement())
+  name       String
+  desc       String
+  checkIn    String
+  checkOut   String
+  url        String
+  price      Decimal
+  guests     Int
+  bedrooms   Int
+  beds       Int
+  bathrooms  Int
+
+  @@map("properties")
+}
+
+model Host {
+  id Int @id @default(autoincrement())
+  name String
+  desc String
+  url  String
+
+  @@map("hosts")
+}
+model HostProperty {
+  id         Int @id @default(autoincrement())
+  hostId     Int
+  propertyId Int
+
+  @@map("host_properties")
+}
